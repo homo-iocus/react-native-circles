@@ -8,7 +8,7 @@ interface Props {
   radius: number,
   intervals: Array<AnglesDescriptor>,
   width: number,
-  color: string,
+  colors: Array<string>,
   backgroundColor: string,
 }
 
@@ -55,7 +55,7 @@ const getPointsByDescriptor = (angles: AnglesDescriptor, center: Point, radius: 
 const MultiArcCircle = ({
   radius,
   intervals,
-  color,
+  colors,
   backgroundColor,
   width
 }: Props) => {
@@ -63,7 +63,7 @@ const MultiArcCircle = ({
   const internalRadius = radius - width;
   const center = { x: radius, y: radius };
 
-  const paths = intervals.map(angles => {
+  const paths = intervals.map((angles, index) => {
     const { start: startPoint, end: endPoint, middle: middlePoint }
       = getPointsByDescriptor(angles, center, radius);
     const { start: startPointInternal, end: endPointInternal, middle: middlePointInternal }
@@ -76,7 +76,7 @@ const MultiArcCircle = ({
         A ${internalRadius} ${internalRadius} , 0, 0, 0, ${startPointInternal.x} ${startPointInternal.y}
         A ${EDGE_RADIUS} ${EDGE_RADIUS} , 0, 0, 1, ${startPoint.x} ${startPoint.y}
       `}
-        fill={color}
+        fill={colors[index]}
       />
       :
       <Path key={`${angles.start}.${angles.end}`} d={`M ${startPoint.x} ${startPoint.y} 
@@ -87,7 +87,7 @@ const MultiArcCircle = ({
         A ${internalRadius} ${internalRadius} , 0, 0, 0, ${startPointInternal.x} ${startPointInternal.y}
         A ${EDGE_RADIUS} ${EDGE_RADIUS} , 0, 0, 1, ${startPoint.x} ${startPoint.y}
       `}
-        fill={color}
+        fill={colors[index]}
       />
   })
 

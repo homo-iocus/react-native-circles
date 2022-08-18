@@ -37,7 +37,7 @@ export default class CircleExample extends React.Component {
             { start: 30, end: 90 },
             { start: 120, end: 300 }
           ]}
-          color='orange'
+          colors=['orange', 'green']
           backgroundColor='#f7f7f7'
           width={4}
         />
@@ -53,6 +53,6 @@ Name            | Description
 ----------------|-----------------------------
 width           | width of the ring    
 radius          | radius of the ring   
-color           | color for arcs that are described by intervals props    
+colors          | Array of colors for arcs that are described by intervals props    
 backgroundColor | color of the ring     
 intervals       | Array of objects({ start: angle, end: angle }) that describe arcs
